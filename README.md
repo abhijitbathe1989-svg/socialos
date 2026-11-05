@@ -1,6 +1,8 @@
 # SocialOS
 
-SocialOS is an organic-first revenue workspace for local service businesses.
+SocialOS is evolving into a multi-tenant AI Business Operating System that unifies AI Marketing, AI Sales, customer success, and revenue analytics. The target architecture and phased delivery plan are documented in [docs/PRODUCT_ARCHITECTURE.md](docs/PRODUCT_ARCHITECTURE.md).
+
+The current application remains an organic-first revenue workspace for local service businesses; the broader agentic capabilities are a staged roadmap, not all live features.
 
 ## Features
 - Supabase email authentication
