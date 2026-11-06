@@ -43,6 +43,25 @@ for (const page of pages) {
   for (const target of localTargets) {
     if (!fs.existsSync(target)) fail(page, `broken local link or asset: ${path.relative(root, target)}`);
   }
+
+  // Validate same-page and local-page fragment navigation targets.
+  const links = [...html.matchAll(/<a\\b([^>]*?)\\bhref=["']([^"']+)["']([^>]*)>/gi)];
+  for (const [, before, href, after] of links) {
+    const targetBlank = /\\btarget=["']_blank["']/i.test(before + after);
+    if (targetBlank && !/\\brel=["'][^"']*noopener/i.test(before + after)) {
+      fail(page, `external/new-tab link lacks rel="noopener": ${href}`);
+    }
+    if (!href.includes("#") || /^(?:https?:|mailto:|tel:|javascript:)/i.test(href)) continue;
+    const [rawPath, rawFragment] = href.split("#");
+    if (!rawFragment) continue;
+    const targetPath = rawPath ? path.resolve(root, path.dirname(page), rawPath.split("?")[0]) : file;
+    if (!fs.existsSync(targetPath) || !targetPath.endsWith(".html")) continue;
+    const targetHtml = fs.readFileSync(targetPath, "utf8");
+    const targetIds = new Set([...targetHtml.matchAll(/\\bid=["']([^"']+)["']/g)].map(m => m[1]));
+    let fragment = rawFragment;
+    try { fragment = decodeURIComponent(rawFragment); } catch {}
+    if (!targetIds.has(fragment)) fail(page, `broken navigation fragment: ${href}`);
+  }
   const refs = new Set([
     ...[...html.matchAll(/getElementById\(["']([^"']+)["']\)/g)].map(m => m[1]),
     ...[...html.matchAll(/\$\(["']([^"']+)["']\)/g)].map(m => m[1]),
