@@ -1,0 +1,48 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SocialOS Billing</title><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><style>
+:root{color-scheme:dark;--bg:#0b1220;--panel:#142239;--line:#2a3d58;--muted:#9aacc4;--text:#f3f6fb;--mint:#82e7c3}*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 12% 0%,#1a3651,transparent 40%),var(--bg);color:var(--text);font:15px/1.5 system-ui,sans-serif}.wrap{max-width:1080px;margin:auto;padding:26px 18px 60px}.top,.row{display:flex;align-items:center;justify-content:space-between;gap:14px}.brand{font-size:22px;font-weight:850}.muted{color:var(--muted)}.pill{border:1px solid #31584d;border-radius:99px;padding:5px 10px;color:#a8f3d8;font-size:12px}.hero{padding:36px 0 18px}.hero h1{font-size:clamp(34px,6vw,54px);line-height:1.05;margin:8px 0}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.card{background:linear-gradient(160deg,#162840,#111c2e);border:1px solid var(--line);border-radius:17px;padding:20px}.card h2{margin:8px 0}.price{font-size:34px;font-weight:850}.small{font-size:12px}.field{display:grid;gap:6px;margin:14px 0}.field label{font-size:13px;color:#c3d0e2}.field select{padding:12px;border:1px solid #3a506c;border-radius:10px;background:#0b1525;color:white;width:100%}button{cursor:pointer;border:0;border-radius:11px;padding:11px 15px;background:var(--mint);color:#10211d;font-weight:750}button:disabled{opacity:.5}.notice{padding:12px 14px;background:#162a40;border:1px solid #38536e;border-radius:11px;margin:12px 0;color:#c8d8ec}.notice.error{border-color:#78484d;color:#ffc2c2}.notice.ok{border-color:#326c57;color:#baf1da}.hidden{display:none!important}.foot{border-top:1px solid var(--line);margin-top:28px;padding-top:16px;color:var(--muted);font-size:12px}@media(max-width:760px){.grid{grid-template-columns:1fr}.top{align-items:flex-start;flex-direction:column}}
+</style></head><body><div class="wrap">
+<header class="top"><div class="brand">◈ SocialOS <span class="muted">/ Billing</span></div><div><a href="index.html" class="pill">← Workspace</a> <a href="admin.html" class="pill">Admin Centre</a></div></header>
+<section class="hero"><div class="pill">TEST MODE · INR CATALOGUE</div><h1>Choose a plan for your business.</h1><p class="muted">Plans are currently configured for test transactions only. No live payments or production subscriptions are enabled.</p></section>
+<div id="message" class="notice">Checking your sign-in and business workspaces…</div>
+<div id="businessWrap" class="card hidden"><div class="field"><label for="business">Business workspace</label><select id="business"></select></div><p class="small muted">The subscription is attached to the selected business, not just your login.</p></div>
+<div id="plans" class="grid" style="margin-top:16px"></div>
+<div class="notice">Suggested launch pricing, not yet validated by customer research: Starter ₹999/month, Growth ₹2,999/month, Pro ₹7,999/month. Annual pricing is modelled as 10 months paid for 12 months. Prices are test-mode catalog entries only. Review tax treatment and local pricing before any live launch.</div>
+<footer class="foot">Stripe-hosted Checkout · Supabase tenant access · Webhook-confirmed subscription state. This page does not grant plan entitlements until Stripe events are verified and processed.</footer>
+</div>
+<script>
+const SUPABASE_URL="https://mbubkkhpmfkripcycxbw.supabase.co";
+const SUPABASE_KEY="sb_publishable_B6CUObYOvnE5MC0aZaE_Uw_Jsyneytj";
+const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+const $=id=>document.getElementById(id);
+const money=n=>new Intl.NumberFormat("en-IN",{style:"currency",currency:"INR",maximumFractionDigits:0}).format(n/100);
+function message(s,type=""){ $("message").textContent=s;$("message").className="notice "+type; }
+async function init(){
+ const {data:{session}}=await sb.auth.getSession();
+ if(!session){message("Sign in to SocialOS first, then return here to choose a plan.","error");return;}
+ const {data:biz,error}=await sb.from("business_profiles").select("id,business_name").eq("owner_id",session.user.id).order("created_at",{ascending:true});
+ if(error){message("Could not load your business workspaces: "+error.message,"error");return;}
+ if(!biz?.length){message("No business workspace found. Create one in the SocialOS Workspace first.","error");return;}
+ $("businessWrap").classList.remove("hidden");
+ $("business").innerHTML=biz.map(b=>'<option value="'+b.id+'">'+escapeHtml(b.business_name)+'</option>').join("");
+ const {data:plans,error:pe}=await sb.from("socialos_plan_catalog").select("*").eq("active",true).eq("test_mode_only",true).order("monthly_amount_minor");
+ if(pe){message("Could not load plan catalogue: "+pe.message,"error");return;}
+ if(!plans?.length){message("Plan catalogue is empty. Contact the platform administrator.","error");return;}
+ $("plans").innerHTML=plans.map((p,i)=>'<article class="card" style="'+(i===1?'border-color:var(--mint)':'')+'"><div class="pill">'+escapeHtml(p.plan_name.toUpperCase())+'</div><h2>'+escapeHtml(p.plan_name)+'</h2><div class="price">'+money(p.monthly_amount_minor)+'<span class="small muted"> / month</span></div><p class="muted">'+escapeHtml(p.description)+'</p><div class="field"><label>Billing interval</label><select id="interval-'+p.plan_key+'"><option value="month">Monthly · '+money(p.monthly_amount_minor)+'</option><option value="year">Annual · '+money(p.annual_amount_minor)+' total</option></select></div><button data-plan="'+p.plan_key+'" class="checkout" style="width:100%">Continue to test checkout</button></article>').join("");
+ document.querySelectorAll(".checkout").forEach(btn=>btn.addEventListener("click",()=>checkout(btn.dataset.plan,btn)));
+ message("Signed in as "+session.user.email+". Select a business and continue to Stripe test checkout.","ok");
+}
+function escapeHtml(s){return String(s||"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+async function checkout(plan,btn){
+ btn.disabled=true;btn.textContent="Creating secure checkout…";
+ try{
+  const {data:{session}}=await sb.auth.getSession();
+  if(!session)throw new Error("Your session expired. Sign in again.");
+  const interval=$("interval-"+plan).value;
+  const {data,error}=await sb.functions.invoke("socialos-create-checkout",{body:{business_id:$("business").value,plan_key:plan,interval}});
+  if(error)throw error;
+  if(!data?.checkout_url)throw new Error(data?.error||"Checkout URL was not returned.");
+  window.location.assign(data.checkout_url);
+ }catch(e){message(e.message||"Unable to start checkout.","error");btn.disabled=false;btn.textContent="Continue to test checkout";}
+}
+init();
+</script></body></html>
