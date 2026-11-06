@@ -17,7 +17,7 @@ The current application remains an organic-first revenue workspace for local ser
 - Automation rule drafts, AI agent run history and approval decision records
 - Secure team invitations with single-use, seven-day tokens, invitation acceptance, revocation and role-based row-level access
 - Security workspace with audit-event review and integration inventory
-- US + Dubai real-estate inventory for sale and rent, with market-specific USD/AED fields, agent licence references, RERA ORN / DLD permit fields, verification workflow and property pipeline
+- Global real-estate marketplace foundation across 73 enabled countries and 191 cities, with local currencies, sale/rent inventory, market-specific compliance references, provider directory, verification workflow and property pipeline
 
 ## Revenue-first / zero-additional-investment policy
 - No paid provider integrations, AI API commitments, advertising, contractors, or new infrastructure subscriptions before customer revenue. Reuse the current stack and free tiers where available; free tiers have limits and can change.
