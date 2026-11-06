@@ -16,6 +16,7 @@ The current application remains an organic-first revenue workspace for local ser
 - Campaign metric entry and campaign profitability reporting
 - Automation rule drafts, AI agent run history and approval decision records
 - Secure team invitations with single-use, seven-day tokens, invitation acceptance, revocation and role-based row-level access
+- Durable agent task queue foundation with tenant-scoped jobs, idempotency keys, retry limits, expiring worker leases and atomic service-role-only claiming
 - Security workspace with audit-event review and integration inventory
 - Global real-estate marketplace foundation across 73 enabled countries and 191 cities, with local currencies, sale/rent inventory, market-specific compliance references, provider directory, verification workflow and property pipeline
 
@@ -47,6 +48,7 @@ The frontend uses the existing Supabase project and its `socialos-api` Edge Func
 
 ## Current limitations
 - Automation rules are configurable but the event scheduler / execution runtime is not enabled; enabling a rule does not run it.
+- The durable agent task queue schema and secure claim function are deployed, but no worker is consuming jobs yet; queued tasks do not run until a worker and execution policies are implemented.
 - Approval decisions are recorded for audit; they do not execute external actions.
 - Team invitation links are created by the owner and must be sent manually; transactional email delivery is not configured.
 - Team RBAC is active for CRM, tasks, campaigns, services, analytics and finance tables. Security settings and automation administration remain owner/admin-only.
