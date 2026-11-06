@@ -69,5 +69,24 @@ for (const page of pages) {
   for (const id of refs) if (!seen.has(id)) fail(page, `script references missing DOM id: ${id}`);
   console.log(`CHECKED ${page}: ${ids.length} ids, ${inlineIndex} inline scripts, ${refs.size} static DOM references`);
 }
+// Public search surfaces must use the live, server-side search RPCs.
+const searchContracts = {
+  "marketplace.html": ["search_marketplace_providers", "search_global_services", "search_global_cities"],
+  "properties.html": ["search_published_property_listings_v2", "search_published_property_service_providers", "search_global_cities"],
+};
+for (const [page, requiredFunctions] of Object.entries(searchContracts)) {
+  const html = fs.readFileSync(path.join(root, page), "utf8");
+  for (const functionName of requiredFunctions) {
+    if (!html.includes(`.rpc("${functionName}"`) && !html.includes(`.rpc('${functionName}'`)) {
+      fail(page, `live search RPC is not wired: ${functionName}`);
+    }
+  }
+}
+const marketplaceHtml = fs.readFileSync(path.join(root, "marketplace.html"), "utf8");
+if (marketplaceHtml.includes(".limit(500)")) fail("marketplace.html", "legacy capped client-side provider search remains");
+const propertyHtml = fs.readFileSync(path.join(root, "properties.html"), "utf8");
+if (propertyHtml.includes('from("published_property_service_providers")')) {
+  fail("properties.html", "legacy direct property-provider query remains");
+}
 if (failures) { console.error(`\n${failures} smoke-check failure(s)`); process.exit(1); }
 console.log(`\nSocialOS static smoke checks passed for ${pages.length} pages.`);
