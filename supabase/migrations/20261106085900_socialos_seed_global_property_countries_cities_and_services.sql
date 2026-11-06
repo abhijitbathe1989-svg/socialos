@@ -24,7 +24,7 @@ insert into public.global_countries(country_code,country_name,currency_code,curr
 ('RO','Romania','RON','lei','sqm','tier2'),
 ('GR','Greece','EUR','€','sqm','tier2'),
 ('HR','Croatia','EUR','€','sqm','tier2'),
-('BG','Bulgaria','BGN','лв','sqm','tier2'),
+('BG','Bulgaria','EUR','€','sqm','tier2'),
 ('EE','Estonia','EUR','€','sqm','tier2'),
 ('LV','Latvia','EUR','€','sqm','tier2'),
 ('LT','Lithuania','EUR','€','sqm','tier2'),
