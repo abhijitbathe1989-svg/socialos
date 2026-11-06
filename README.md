@@ -31,7 +31,7 @@ The current application remains an organic-first revenue workspace for local ser
 - Current plan prices are unvalidated planning assumptions. Checkout is disabled; SocialOS is not accepting payments.
 - Reinvest only cleared customer cash, after direct costs, taxes, refunds and a reserve.
 - Defer payroll provider integrations until customers request them and revenue can fund the work.
-- See [docs/REVENUE_FIRST_POLICY.md](docs/REVENUE_FIRST_POLICY.md).
+- Do not add a recurring cost until there are three consecutive months of positive operating cash flow, documented customer demand, and a clear payback case.
 
 ## Deployment
 The static frontend lives in `web/`. GitHub Actions deploys it to GitHub Pages on pushes to `main`.
