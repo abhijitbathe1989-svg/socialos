@@ -33,6 +33,16 @@ for (const page of pages) {
     try { new vm.Script(source, { filename: `${page}#inline-${inlineIndex}` }); }
     catch (error) { fail(page, `inline JavaScript syntax: ${error.message}`); }
   }
+  const localTargets = new Set();
+  for (const [, raw] of html.matchAll(/\\b(?:href|src)=["']([^"']+)["']/gi)) {
+    const value = raw.trim();
+    if (!value || /^(?:https?:|mailto:|tel:|data:|javascript:|#|\/)/i.test(value) || value.includes("${")) continue;
+    const target = value.split(/[?#]/)[0];
+    if (target) localTargets.add(path.resolve(root, path.dirname(page), target));
+  }
+  for (const target of localTargets) {
+    if (!fs.existsSync(target)) fail(page, `broken local link or asset: ${path.relative(root, target)}`);
+  }
   const refs = new Set([
     ...[...html.matchAll(/getElementById\(["']([^"']+)["']\)/g)].map(m => m[1]),
     ...[...html.matchAll(/\$\(["']([^"']+)["']\)/g)].map(m => m[1]),
