@@ -77,7 +77,7 @@ The frontend uses the existing Supabase project and its `socialos-api` Edge Func
 - Country and city reference records are not customers, active business locations, property listings or verified service providers.
 
 
-## Global launch operations\n- See `docs/GLOBAL_LAUNCH_OPERATING_PLAN.md` for the staged global go-to-market plan, department operating model, trust/compliance controls, free-first acquisition, revenue gates and production launch checklist. The plan distinguishes implemented foundations from capabilities requiring external accounts, legal approval, real providers and operational staff.\n\n## Global provider marketplace (November 2026)
+## Global launch operations\n- See `docs/GLOBAL_LAUNCH_OPERATING_PLAN.md` for the staged global go-to-market plan, department operating model, trust/compliance controls, free-first acquisition, revenue gates and production launch checklist. The plan distinguishes implemented foundations from capabilities requiring external accounts, legal approval, real providers and operational staff.\n- See `docs/ORGANIC_LAUNCH_KIT.md` for provider recruitment copy, customer launch messaging, ten organic content ideas, referral loops, channel rules and weekly pilot operations.\n\n## Global provider marketplace (November 2026)
 - Added `marketplace_providers`, `marketplace_provider_services`, and `marketplace_enquiries` with RLS enabled.
 - Providers can register while signed in; new profiles are private and have `pending` verification status. Only active, verified providers and their active services are publicly discoverable.
 - Customers can submit enquiries with explicit consent. Provider owners can read and update their own enquiry records.
