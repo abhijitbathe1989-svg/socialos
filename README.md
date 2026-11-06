@@ -84,3 +84,13 @@ The frontend uses the existing Supabase project and its `socialos-api` Edge Func
 - Provider registration is free in this phase. No paid lead routing, commission collection, provider verification automation, payment processing or dispute resolution is enabled.
 - Public marketplace page: `/marketplace.html`. It requires the global country/service catalogue import to have completed for filters to populate.
 - Verification must validate applicable identity, company registration, professional qualifications, licences, insurance and local regulatory permissions, particularly for financial, insurance, legal, healthcare and real-estate services.
+
+
+## Global Admin & Revenue Centre (November 2026)
+- Restricted admin UI: `/admin.html`. Admin role checks use database functions and private role storage; ordinary authenticated users cannot assign themselves roles.
+- First owner bootstrap is a one-time manual SQL Editor action. The admin page generates the SQL for the currently signed-in email. Only the project owner should run it.
+- Provider review actions are recorded in a private audit table. Public marketplace exposure remains limited to active, verified providers and services.
+- Enquiry operations allow authorized admin/reviewer roles to update workflow status.
+- Revenue ledger records gross transaction value, SocialOS platform revenue, currency, type and accounting status. Entries are manual records; no payment processor, charge, settlement, refund or automated commission collection is connected.
+- Revenue ledger is limited to owner/admin/finance roles; provider review to owner/admin/reviewer.
+- Dashboard counts include global catalogue coverage and marketplace operations. Provider verification requires independent checks for applicable identity, registration, licences, qualifications and insurance.
