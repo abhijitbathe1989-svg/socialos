@@ -106,3 +106,8 @@ The platform now has a verified provider directory taxonomy with 25 categories: 
 - India RERA Act: https://www.indiacode.nic.in/handle/123456789/2158
 - India DPDP Act: https://www.indiacode.nic.in/indiacode/handle/123456789/22037?view_type=browse
 - Dubai Land Department Real Estate Ad Permit: https://dubailand.gov.ae/en/eservices/real-estate-ad-permit
+
+
+## Commercial launch strategy
+
+See [GO_TO_MARKET_REVENUE_PLAN.md](GO_TO_MARKET_REVENUE_PLAN.md) for the recommended agent-first, revenue-first launch sequence, pricing experiments, customer acquisition targets and operating gates.
