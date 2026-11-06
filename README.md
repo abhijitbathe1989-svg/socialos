@@ -20,7 +20,7 @@ The current application remains an organic-first revenue workspace for local ser
 
 ## Revenue-first / zero-additional-investment policy
 - No paid provider integrations, AI API commitments, advertising, contractors, or new infrastructure subscriptions before customer revenue. Reuse the current stack and free tiers where available; free tiers have limits and can change.
-- Pricing displayed in the prototype is indicative and unvalidated. Checkout is disabled; SocialOS is not currently accepting payments.
+- Pricing displayed in the prototype is indicative and unvalidated. Only test-mode checkout links exist; no live billing is enabled and SocialOS is not currently accepting payments.
 - Reinvest only from cash actually collected, not bookings, invoices, forecasts, or test transactions. Keep essential operating costs and a cash reserve ahead of discretionary growth spend.
 - Add a paid tool or provider only when a documented customer need exists, the cost is covered by collected revenue, and the expected payback is clear.
 - Payroll integrations are deferred. Manual records / CSV workflows may be considered before any paid API partnership.
