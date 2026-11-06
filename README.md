@@ -94,3 +94,16 @@ The frontend uses the existing Supabase project and its `socialos-api` Edge Func
 - Revenue ledger records gross transaction value, SocialOS platform revenue, currency, type and accounting status. Entries are manual records; no payment processor, charge, settlement, refund or automated commission collection is connected.
 - Revenue ledger is limited to owner/admin/finance roles; provider review to owner/admin/reviewer.
 - Dashboard counts include global catalogue coverage and marketplace operations. Provider verification requires independent checks for applicable identity, registration, licences, qualifications and insurance.
+
+
+## SocialOS Billing Engine (test mode)
+
+- Public billing page: `web/billing.html`.
+- Test-only Stripe products and recurring INR prices are configured for Starter (₹999/month; ₹9,990/year), Growth (₹2,999/month; ₹29,990/year), and Pro (₹7,999/month; ₹79,990/year). These are provisional price hypotheses, not validated market prices.
+- Plan catalog is stored in `public.socialos_plan_catalog`; customer checkout audit records are in `public.socialos_checkout_sessions`; webhook idempotency/audit records are in `public.socialos_stripe_events`.
+- Existing `public.billing_subscriptions` stores tenant subscription state.
+- `socialos-create-checkout` is JWT-protected, validates the signed-in user owns the selected business, and creates Stripe-hosted subscription Checkout Sessions.
+- `socialos-stripe-webhook` validates Stripe signatures, deduplicates event IDs, and processes checkout and subscription lifecycle events. It also retains refund, dispute and early-fraud events for review.
+- Stripe webhook endpoint (test mode): `we_1UYjrSCXleGnunRTDxXL6inN`; endpoint URL: `https://mbubkkhpmfkripcycxbw.supabase.co/functions/v1/socialos-stripe-webhook`.
+- Before testing, configure Edge Function secrets `STRIPE_SECRET_KEY` (test-mode restricted key with Checkout Session write access) and `STRIPE_WEBHOOK_SECRET` (signing secret for the test webhook endpoint) in Supabase. Never place secrets in frontend code or Git.
+- Test mode only. No live payment processing, marketplace payouts, refunds, tax calculation, or entitlement enforcement is enabled. Before production: configure live credentials and webhook separately, validate GST/VAT/tax obligations and merchant eligibility, build customer self-service portal, complete dispute/refund workflows, and enforce feature entitlements from verified subscription state.
