@@ -45,8 +45,9 @@ No commission on property value is included in the initial SocialOS platform pri
 
 - Supabase tables: `property_listings`, `property_enquiries`, `property_saved_searches`.
 - RLS scopes agent inventory and enquiries to the existing SocialOS business workspace and CRM permission.
-- A restricted public view exposes only verified, published property attributes.
+- A restricted, security-invoker public view exposes only verified, published property attributes and explicitly opted-in public agent contact fields.
 - The authenticated SocialOS workspace includes a US/Dubai property listing form and inventory manager.
+- A public `web/properties.html` search page filters verified inventory by market, sale/rent, category, city/area, price and bedroom count.
 - Listings can be saved as drafts or submitted for review. The UI cannot self-verify or publish listings.
 - Public enquiry intake, saved-search alerts, map search, bulk import, photo storage, MLS/IDX integrations, Dubai portal feeds, moderation console and subscription billing are not yet wired end-to-end.
 - The current interface stores photo URLs only; production image upload should use a private Supabase Storage bucket with signed upload policies and moderation.
