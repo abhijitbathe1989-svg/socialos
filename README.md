@@ -34,6 +34,7 @@ The frontend uses the existing Supabase project and its `socialos-api` Edge Func
 - Approval decisions are recorded for audit; they do not execute external actions.
 - Team invitation links are created by the owner and must be sent manually; transactional email delivery is not configured.
 - Team RBAC is active for CRM, tasks, campaigns, services, analytics and finance tables. Security settings and automation administration remain owner/admin-only.
+- Default role map: Admin (all workspace permissions); Manager (CRM, tasks, campaigns, services, analytics, finance); Sales (CRM, tasks); Marketing (campaigns, analytics); Finance (analytics, finance); Support (CRM, tasks); Viewer (analytics). Owners/admins can customize supported business permissions.
 - Payroll sync and external provider OAuth are not connected.
 - Integration inventory is visible, but provider OAuth connections, encrypted credential storage and token revocation are not configured.
 - Campaign ROI depends on metrics manually recorded or synced; it is not a guaranteed attribution measure.
