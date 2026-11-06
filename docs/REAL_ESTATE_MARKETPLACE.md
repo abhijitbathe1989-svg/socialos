@@ -2,7 +2,7 @@
 
 ## Scope
 
-A global, multi-country property marketplace and broker operating module inside SocialOS. The database now has a country/currency reference model and a curated launch set of 54 countries and 154 major cities. The schema accepts future country and city additions without a redesign. This is not yet a complete 195-country gazetteer or an exhaustive city database; non-seeded localities can still be entered as free-text while the reference catalogue is expanded. It supports property owners, licensed agents, brokerages, developers and property managers. It is an inventory and lead platform; SocialOS is not itself a real-estate broker, MLS, escrow provider or legal verifier.
+A global, multi-country property marketplace and broker operating module inside SocialOS. The database now has a country/currency reference model and a curated launch set of 73 countries and 191 major cities. The schema accepts future country and city additions without a redesign. This is not yet a complete 195-country gazetteer or an exhaustive city database; non-seeded localities can still be entered as free-text while the reference catalogue is expanded. It supports property owners, licensed agents, brokerages, developers and property managers. It is an inventory and lead platform; SocialOS is not itself a real-estate broker, MLS, escrow provider or legal verifier.
 
 ### Initial country and city coverage
 
