@@ -85,10 +85,10 @@ CEO Orchestrator + Business Goals + Policy Engine
 
 ## Shared platform services
 
-The current release now exposes first-pass workspaces for Analytics, Automation & AI, Team Management, and Security & Integrations. Analytics reads the existing profitability views and campaign metrics; automation rules are stored disabled by default; approval decisions are recorded without executing external actions; team entries remain owner-only drafts until invitation delivery and member-level authorization are implemented. Integration inventory is a catalogue/status view only, and payroll sync is not connected.
+The current release exposes workspaces for Analytics, Automation & AI, Team Management, and Security & Integrations. Team invitations use hashed, single-use, seven-day tokens; invited users must authenticate with the matching email and accept the invitation. RLS enforces role-based access to CRM, tasks, campaigns, services, analytics and finance data. Invitation links must currently be sent manually because transactional email is not configured. Automation rules are stored disabled by default; approval decisions are recorded without executing external actions. Integration inventory is a catalogue/status view only, and payroll sync and provider OAuth are not connected.
 
 - Multi-tenant workspace isolation and row-level security.
-- Role-based access control and least-privilege agent permissions.
+- Role-based access control and least-privilege agent permissions. Current roles: admin, manager, sales, marketing, finance, support, viewer; permissions are enforced by database RLS for supported business tables.
 - Agent task queue with status, retries, idempotency, timeouts, and run logs.
 - Approval inbox for external actions and sensitive business decisions.
 - Integration registry for OAuth connections, scopes, token status, and revocation.
@@ -128,7 +128,8 @@ Do not duplicate the same person across marketing and sales: use a unified conta
 ### Phase 1 — Reliable revenue workspace
 - Add analytics workspace for sales funnel, revenue, cash collection, campaign spend, attributed ROI, and margin.
 - Add owner-only automation rule drafts, agent run history, and approval decision records.
-- Add team member draft records and audit-event review.
+- Add secure team invitations, invitation acceptance, revocation, role presets and RLS-backed permissions.
+- Add audit-event review.
 - Verify tenant isolation, RLS, authentication, and workspace membership.
 - Consolidate CRM, lead source, pipeline, tasks, orders, payments, and cash collection.
 - Add approval inbox, audit trail, and clear dashboard definitions.
@@ -163,4 +164,4 @@ A feature is not production-ready merely because its UI exists. Each release mus
 
 ## Current implementation boundary
 
-This document defines the recommended target architecture; it does not claim every component is already implemented. The current application has a static frontend, Supabase-backed workspace/CRM functionality, campaign drafts, and test-mode checkout. Social publishing, live billing, autonomous outbound messaging, and a fully operational agent runtime require additional implementation, provider credentials, permissions, and verification.
+This document defines the recommended target architecture; it does not claim every component is already implemented. The current application has a static frontend, Supabase-backed workspace/CRM functionality, secure team invitation and initial role-based access, campaign drafts, and test-mode checkout. Team invitation emails, payroll sync, provider OAuth, scheduled automation execution and autonomous AI agents still require external service configuration and end-to-end verification. Social publishing, live billing, autonomous outbound messaging, and a fully operational agent runtime require additional implementation, provider credentials, permissions, and verification.
