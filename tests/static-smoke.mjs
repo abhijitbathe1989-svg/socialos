@@ -34,7 +34,7 @@ for (const page of pages) {
     catch (error) { fail(page, `inline JavaScript syntax: ${error.message}`); }
   }
   const localTargets = new Set();
-  for (const [, raw] of html.matchAll(/\\b(?:href|src)=["']([^"']+)["']/gi)) {
+  for (const [, raw] of html.matchAll(/\b(?:href|src)=["']([^"']+)["']/gi)) {
     const value = raw.trim();
     if (!value || /^(?:https?:|mailto:|tel:|data:|javascript:|#|\/)/i.test(value) || value.includes("${")) continue;
     const target = value.split(/[?#]/)[0];
