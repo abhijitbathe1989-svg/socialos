@@ -57,7 +57,7 @@ The frontend uses the existing Supabase project and its `socialos-api` Edge Func
 - Supabase manages database backups according to project settings; a SocialOS restore drill has not been verified.
 - Stripe checkout links are test mode only; live billing is not enabled.
 - Campaigns are saved as drafts; no social network or ad platform publishing is enabled.
-- Real-estate listings are saved as drafts or pending review; public exposure is limited to verified and published records. Public enquiry intake, MLS/IDX and UAE portal feed integrations are not yet enabled.
+- Real-estate listings are saved as drafts or pending review; the public US/Dubai property search reads only verified and published records. Public enquiry intake, MLS/IDX and UAE portal feed integrations are not yet enabled.
 - Real-estate agent subscription and featured-listing prices are launch hypotheses documented in `docs/REAL_ESTATE_MARKETPLACE.md`, not verified competitor tariffs; live billing remains disabled.
 - Email sign-up depends on Supabase email confirmation and configured email delivery.
 - No leads are contacted automatically.
