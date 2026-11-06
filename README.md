@@ -17,6 +17,7 @@ The current application remains an organic-first revenue workspace for local ser
 - Automation rule drafts, AI agent run history and approval decision records
 - Secure team invitations with single-use, seven-day tokens, invitation acceptance, revocation and role-based row-level access
 - Security workspace with audit-event review and integration inventory
+- US + Dubai real-estate inventory for sale and rent, with market-specific USD/AED fields, agent licence references, RERA ORN / DLD permit fields, verification workflow and property pipeline
 
 ## Revenue-first / zero-additional-investment policy
 - No paid provider integrations, AI API commitments, advertising, contractors, or new infrastructure subscriptions before customer revenue. Reuse the current stack and free tiers where available; free tiers have limits and can change.
@@ -56,5 +57,7 @@ The frontend uses the existing Supabase project and its `socialos-api` Edge Func
 - Supabase manages database backups according to project settings; a SocialOS restore drill has not been verified.
 - Stripe checkout links are test mode only; live billing is not enabled.
 - Campaigns are saved as drafts; no social network or ad platform publishing is enabled.
+- Real-estate listings are saved as drafts or pending review; public exposure is limited to verified and published records. Public enquiry intake, MLS/IDX and UAE portal feed integrations are not yet enabled.
+- Real-estate agent subscription and featured-listing prices are launch hypotheses documented in `docs/REAL_ESTATE_MARKETPLACE.md`, not verified competitor tariffs; live billing remains disabled.
 - Email sign-up depends on Supabase email confirmation and configured email delivery.
 - No leads are contacted automatically.
