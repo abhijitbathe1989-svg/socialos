@@ -25,4 +25,4 @@ grant select on public.property_service_categories to anon,authenticated;
 create view public.published_property_service_providers with (security_invoker=true) as
 select id,category_slug,country_code,city,service_areas,provider_name,description,website_url,public_contact_name,public_contact_phone,public_contact_email,currency,starting_price,pricing_model,license_authority,verification_status,created_at
 from public.property_service_providers where status='published' and verification_status='verified';
-grant select on public.published_property_service_providers to anon,authenticated;
+grant select (id,category_slug,country_code,city,service_areas,provider_name,description,website_url,public_contact_name,public_contact_phone,public_contact_email,currency,starting_price,pricing_model,license_authority,verification_status,created_at) on public.property_service_providers to anon;\ngrant select on public.published_property_service_providers to anon,authenticated;
