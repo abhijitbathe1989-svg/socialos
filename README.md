@@ -15,7 +15,7 @@ The current application remains an organic-first revenue workspace for local ser
 - Analytics workspace: sales funnel, booked revenue, cash collection, outstanding balance, contribution margin, campaign spend and attributed marketing ROI
 - Campaign metric entry and campaign profitability reporting
 - Automation rule drafts, AI agent run history and approval decision records
-- Team member draft records with role presets and permission metadata
+- Secure team invitations with single-use, seven-day tokens, invitation acceptance, revocation and role-based row-level access
 - Security workspace with audit-event review and integration inventory
 
 ## Deployment
@@ -32,8 +32,10 @@ The frontend uses the existing Supabase project and its `socialos-api` Edge Func
 ## Current limitations
 - Automation rules are configurable but the event scheduler / execution runtime is not enabled; enabling a rule does not run it.
 - Approval decisions are recorded for audit; they do not execute external actions.
-- Team records are owner-only drafts. Invitation delivery, member authentication, role enforcement and payroll sync are not enabled.
-- Integration inventory is visible, but provider OAuth connections and credential vaulting are not configured.
+- Team invitation links are created by the owner and must be sent manually; transactional email delivery is not configured.
+- Team RBAC is active for CRM, tasks, campaigns, services, analytics and finance tables. Security settings and automation administration remain owner/admin-only.
+- Payroll sync and external provider OAuth are not connected.
+- Integration inventory is visible, but provider OAuth connections, encrypted credential storage and token revocation are not configured.
 - Campaign ROI depends on metrics manually recorded or synced; it is not a guaranteed attribution measure.
 - Supabase manages database backups according to project settings; a SocialOS restore drill has not been verified.
 - Stripe checkout links are test mode only; live billing is not enabled.
