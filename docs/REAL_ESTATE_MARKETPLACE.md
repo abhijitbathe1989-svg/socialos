@@ -76,10 +76,10 @@ The platform now has a verified provider directory taxonomy with 25 categories: 
 - A restricted, security-invoker public view exposes only verified, published property attributes and explicitly opted-in public agent contact fields.
 - Global country and city reference tables contain 54 country/currency entries and 154 curated city entries; additional countries/cities can be seeded without schema changes.
 - A 25-category property services taxonomy and verified provider directory have been added with country/city filters and tenant-scoped RLS.
-- The authenticated SocialOS workspace includes a US/Dubai property listing form and inventory manager.
+- The authenticated SocialOS workspace includes a global country/currency property listing form, inventory manager, and service-provider onboarding form.
 - A public `web/properties.html` marketplace filters verified inventory by country, sale/rent, category, city/area, local currency price and bedroom count; it also includes a verified property-services directory.
 - Listings can be saved as drafts or submitted for review. The UI cannot self-verify or publish listings.
-- Public enquiry intake, saved-search alerts, map search, bulk import, photo storage, MLS/IDX integrations, country-specific portal feeds, full moderation console, provider onboarding UI and subscription billing are not yet wired end-to-end.
+- Public enquiry intake, saved-search alerts, map search, bulk import, photo storage, MLS/IDX integrations, country-specific portal feeds, full moderation console and subscription billing are not yet wired end-to-end.
 - The current interface stores photo URLs only; production image upload should use a private Supabase Storage bucket with signed upload policies and moderation.
 
 ## Delivery sequence
