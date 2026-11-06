@@ -75,3 +75,12 @@ The frontend uses the existing Supabase project and its `socialos-api` Edge Func
 - The first import starts automatically on the first signed-in Command Centre visit when country coverage or the service catalogue is incomplete; the **Global footprint → Import global directory** control can retry it. The importer is idempotent and records its completion status. Until that action succeeds, the database retains its previous 73-country / 191-city snapshot and the new service taxonomy tables remain empty.
 - Data sources: [REST Countries](https://restcountries.com/) and [GeoNames](https://www.geonames.org/). GeoNames data is provided under CC BY 4.0; attribution is required.
 - Country and city reference records are not customers, active business locations, property listings or verified service providers.
+
+
+## Global provider marketplace (November 2026)
+- Added `marketplace_providers`, `marketplace_provider_services`, and `marketplace_enquiries` with RLS enabled.
+- Providers can register while signed in; new profiles are private and have `pending` verification status. Only active, verified providers and their active services are publicly discoverable.
+- Customers can submit enquiries with explicit consent. Provider owners can read and update their own enquiry records.
+- Provider registration is free in this phase. No paid lead routing, commission collection, provider verification automation, payment processing or dispute resolution is enabled.
+- Public marketplace page: `/marketplace.html`. It requires the global country/service catalogue import to have completed for filters to populate.
+- Verification must validate applicable identity, company registration, professional qualifications, licences, insurance and local regulatory permissions, particularly for financial, insurance, legal, healthcare and real-estate services.
