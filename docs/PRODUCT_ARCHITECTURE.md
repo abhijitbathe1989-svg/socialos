@@ -123,6 +123,17 @@ Use tenant-scoped records and foreign keys for:
 
 Do not duplicate the same person across marketing and sales: use a unified contact identity with separate consent, lifecycle, and activity records.
 
+## Revenue-first delivery and spending gates
+
+SocialOS follows a cash-funded, customer-validated sequence. No new paid subscription, provider partnership, paid AI API, advertising, contractor, or infrastructure commitment is approved before customer revenue. Existing free-tier services may be used within their current limits; zero-cost operation is not guaranteed because provider terms and quotas can change.
+
+1. **Pre-revenue:** use the current GitHub Pages + Supabase setup, free development tools, manual workflows, and organic customer discovery. Keep live billing, paid ads, payroll APIs, and paid AI calls disabled. Validate the product with interviews and hands-on pilots.
+2. **First collected revenue:** record cash received and direct costs. Cover essential hosting, security, support, taxes, refunds, and a reserve before discretionary spend. Do not treat test payments, booked revenue, or unpaid invoices as cash available.
+3. **Repeatable revenue:** consider a paid tool only when multiple customers need it, free/manual alternatives are inadequate, usage limits are understood, and the cost can be covered by collected revenue with a measurable payback.
+4. **Scale:** add payroll providers and other integrations one at a time, after customer demand, provider approval, security review, and support economics are established.
+
+A practical default is to keep discretionary software and API spend at zero until there are at least three consecutive months of positive operating cash flow. Then cap new recurring tool commitments at a small, reviewed share of collected monthly revenue; review each commitment monthly and cancel unused services.
+
 ## Delivery roadmap
 
 ### Phase 1 — Reliable revenue workspace
