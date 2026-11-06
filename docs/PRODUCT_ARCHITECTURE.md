@@ -85,6 +85,8 @@ CEO Orchestrator + Business Goals + Policy Engine
 
 ## Shared platform services
 
+The current release now exposes first-pass workspaces for Analytics, Automation & AI, Team Management, and Security & Integrations. Analytics reads the existing profitability views and campaign metrics; automation rules are stored disabled by default; approval decisions are recorded without executing external actions; team entries remain owner-only drafts until invitation delivery and member-level authorization are implemented. Integration inventory is a catalogue/status view only, and payroll sync is not connected.
+
 - Multi-tenant workspace isolation and row-level security.
 - Role-based access control and least-privilege agent permissions.
 - Agent task queue with status, retries, idempotency, timeouts, and run logs.
@@ -124,6 +126,9 @@ Do not duplicate the same person across marketing and sales: use a unified conta
 ## Delivery roadmap
 
 ### Phase 1 — Reliable revenue workspace
+- Add analytics workspace for sales funnel, revenue, cash collection, campaign spend, attributed ROI, and margin.
+- Add owner-only automation rule drafts, agent run history, and approval decision records.
+- Add team member draft records and audit-event review.
 - Verify tenant isolation, RLS, authentication, and workspace membership.
 - Consolidate CRM, lead source, pipeline, tasks, orders, payments, and cash collection.
 - Add approval inbox, audit trail, and clear dashboard definitions.
