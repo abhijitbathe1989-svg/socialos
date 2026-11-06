@@ -18,7 +18,9 @@ The current application remains an organic-first revenue workspace for local ser
 - Secure team invitations with single-use, seven-day tokens, invitation acceptance, revocation and role-based row-level access
 - Durable agent task queue foundation with tenant-scoped jobs, idempotency keys, retry limits, expiring worker leases and atomic service-role-only claiming
 - Security workspace with audit-event review and integration inventory
-- Global real-estate marketplace foundation across 73 enabled countries and 191 cities, with local currencies, sale/rent inventory, market-specific compliance references, provider directory, verification workflow and property pipeline
+- Global real-estate marketplace foundation with country/city metadata, local currencies, sale/rent inventory, market-specific compliance references, provider directory, verification workflow and property pipeline
+- Enterprise Command Centre for global operations, finance, sales, marketing, tasks, AI run history, approvals, team and geographic catalogue
+- Global service taxonomy spanning finance, banking, lending, insurance, accounting, investment, real estate, property management, construction, healthcare, education, commerce, technology, logistics, travel, food, agriculture, energy and professional services
 
 ## Revenue-first / zero-additional-investment policy
 - No paid provider integrations, AI API commitments, advertising, contractors, or new infrastructure subscriptions before customer revenue. Reuse the current stack and free tiers where available; free tiers have limits and can change.
@@ -64,3 +66,12 @@ The frontend uses the existing Supabase project and its `socialos-api` Edge Func
 - Real-estate agent subscription and featured-listing prices are launch hypotheses documented in `docs/REAL_ESTATE_MARKETPLACE.md`, not verified competitor tariffs; live billing remains disabled.
 - Email sign-up depends on Supabase email confirmation and configured email delivery.
 - No leads are contacted automatically.
+
+
+## Global directory expansion (November 2026)
+- Supabase schema now supports city population, coordinates, administrative classification, GeoNames ID and timezone metadata.
+- Added public-read / RLS-protected global service taxonomy tables: `global_service_categories` and `global_services`.
+- Deployed the JWT-protected `socialos-global-catalog-import` Edge Function. It imports country/currency metadata from REST Countries and populated cities from GeoNames `cities15000`, retaining cities with population >= 50,000 and national / administrative capitals. It seeds the cross-industry service taxonomy in the same operation.
+- The first import is intentionally user-triggered from **Command Centre → Global footprint → Import / refresh global directory** after signing in. The importer is idempotent and records its completion status. Until that action succeeds, the database retains its previous 73-country / 191-city snapshot and the new service taxonomy tables remain empty.
+- Data sources: [REST Countries](https://restcountries.com/) and [GeoNames](https://www.geonames.org/). GeoNames data is provided under CC BY 4.0; attribution is required.
+- Country and city reference records are not customers, active business locations, property listings or verified service providers.
