@@ -77,7 +77,7 @@ The frontend uses the existing Supabase project and its `socialos-api` Edge Func
 - Country and city reference records are not customers, active business locations, property listings or verified service providers.
 
 
-## Global provider marketplace (November 2026)
+## Global launch operations\n- See `docs/GLOBAL_LAUNCH_OPERATING_PLAN.md` for the staged global go-to-market plan, department operating model, trust/compliance controls, free-first acquisition, revenue gates and production launch checklist. The plan distinguishes implemented foundations from capabilities requiring external accounts, legal approval, real providers and operational staff.\n\n## Global provider marketplace (November 2026)
 - Added `marketplace_providers`, `marketplace_provider_services`, and `marketplace_enquiries` with RLS enabled.
 - Providers can register while signed in; new profiles are private and have `pending` verification status. Only active, verified providers and their active services are publicly discoverable.
 - Customers can submit enquiries with explicit consent. Provider owners can read and update their own enquiry records.
@@ -89,7 +89,7 @@ The frontend uses the existing Supabase project and its `socialos-api` Edge Func
 ## Global Admin & Revenue Centre (November 2026)
 - Restricted admin UI: `/admin.html`. Admin role checks use database functions and private role storage; ordinary authenticated users cannot assign themselves roles.
 - First owner bootstrap is a one-time manual SQL Editor action. The admin page generates the SQL for the currently signed-in email. Only the project owner should run it.
-- Provider review actions are recorded in a private audit table. Public marketplace exposure remains limited to active, verified providers and services.
+- Provider dashboard at `/provider-dashboard.html` for owner-scoped provider profiles, verification status, customer enquiry inbox and lead-status updates; it does not send messages or perform external actions.\n- Provider review actions are recorded in a private audit table. Public marketplace exposure remains limited to active, verified providers and services.
 - Enquiry operations allow authorized admin/reviewer roles to update workflow status.
 - Revenue ledger records gross transaction value, SocialOS platform revenue, currency, type and accounting status. Entries are manual records; no payment processor, charge, settlement, refund or automated commission collection is connected.
 - Revenue ledger is limited to owner/admin/finance roles; provider review to owner/admin/reviewer.
